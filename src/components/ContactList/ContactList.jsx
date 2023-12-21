@@ -1,5 +1,4 @@
 import { Component } from 'react';
-import { nanoid } from 'nanoid';
 
 class ContactList extends Component {
   render() {
@@ -10,7 +9,7 @@ class ContactList extends Component {
         <h2>Contacts</h2>
         <ul>
           {contacts.map(element => (
-            <li key={nanoid()}>{element.nombre}</li>
+            <li key={element.id}>{element.nombre}</li>
           ))}
         </ul>
       </div>

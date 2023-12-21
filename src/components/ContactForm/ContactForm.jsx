@@ -3,6 +3,13 @@ import { nanoid } from 'nanoid';
 import './ContactForm.module.css';
 
 class ContactForm extends Component {
+  handleClick = e => {
+    e.preventDefault();
+    const inputName = document.querySelector('input');
+    console.log(inputName.value);
+    this.props.addContacts({ nombre: inputName.value, id: nanoid() });
+  };
+
   render() {
     return (
       <div>
@@ -18,7 +25,9 @@ class ContactForm extends Component {
               required
             />
           </label>
-          <button type="submit">Add contact</button>
+          <button type="submit" onClick={this.handleClick}>
+            Add contact
+          </button>
         </form>
       </div>
     );

@@ -4,12 +4,12 @@ import ContactList from './ContactList/ContactList.jsx';
 
 class App extends Component {
   state = {
-    contacts: [
-      { nombre: 'jcr', id: 1 },
-      { nombre: 'mono', id: 1 },
-      { nombre: 'luis', id: 1 },
-    ],
+    contacts: [],
     name: '',
+  };
+
+  addContacts = contact => {
+    this.setState(this.state.contacts.add(contact));
   };
 
   render() {
@@ -23,7 +23,7 @@ class App extends Component {
           color: '#010101',
         }}
       >
-        <ContactForm />
+        <ContactForm addContacts={this.addContacts} />
         <ContactList contacts={this.state.contacts} />
       </div>
     );
