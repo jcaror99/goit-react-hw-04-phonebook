@@ -10,9 +10,11 @@ class App extends Component {
   };
 
   addContacts = contact => {
-    this.setState(prevState => ({
-      contacts: [...prevState.contacts, contact],
-    }));
+    if (contact.name.trim()) {
+      this.setState(prevState => ({
+        contacts: [...prevState.contacts, contact],
+      }));
+    }
   };
 
   render() {

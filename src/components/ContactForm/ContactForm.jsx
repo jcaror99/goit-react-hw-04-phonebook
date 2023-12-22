@@ -1,6 +1,6 @@
 import { Component } from 'react';
 import { nanoid } from 'nanoid';
-import './ContactForm.module.css';
+import css from './ContactForm.module.css';
 
 class ContactForm extends Component {
   handleClick = e => {
@@ -32,6 +32,7 @@ class ContactForm extends Component {
           <label htmlFor={nanoid()}>
             Number
             <input
+              className={css.number}
               type="tel"
               name="number"
               pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"

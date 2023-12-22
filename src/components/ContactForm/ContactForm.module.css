@@ -14,3 +14,8 @@ label {
 button {
   margin-top: 20px;
 }
+
+.number {
+  border: 1px solid rgb(60, 119, 188);
+  box-shadow: 0px 0px 8px 2px rgb(60, 119, 188);
+}
