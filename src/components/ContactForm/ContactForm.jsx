@@ -5,8 +5,13 @@ import './ContactForm.module.css';
 class ContactForm extends Component {
   handleClick = e => {
     e.preventDefault();
-    const inputName = document.querySelector('input');
-    this.props.addContacts({ nombre: inputName.value, id: nanoid() });
+    const inputName = document.querySelector('input[name="name"]');
+    const inputTel = document.querySelector('input[name="number"]');
+    this.props.addContacts({
+      name: inputName.value,
+      id: nanoid(),
+      number: inputTel.value,
+    });
   };
 
   render() {
