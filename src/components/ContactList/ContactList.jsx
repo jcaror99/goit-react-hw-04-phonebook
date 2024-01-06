@@ -1,22 +1,38 @@
 import { Component } from 'react';
+import DeleteContact from '../DeleteContact/DeleteContact.jsx';
+import css from './ContactList.module.css';
 
 class ContactList extends Component {
   render() {
-    const { contacts, filter } = this.props;
+    const { contacts, filter, deleteContacts } = this.props;
     const filterContacts = contacts.filter(contact =>
       contact.name.toLowerCase().includes(filter.toLowerCase())
     );
 
     return (
-      <div>
-        <ul>
-          {filterContacts.map(element => (
-            <li key={element.id}>
-              {element.name}: {element.number}
-            </li>
-          ))}
-        </ul>
-      </div>
+      <section>
+        <div>
+          <ul>
+            {filterContacts.map(element => (
+              <li key={element.id}>
+                {element.name}: {element.number}
+              </li>
+            ))}
+          </ul>
+        </div>
+        <div>
+          <ul className={css.listDeleteContact}>
+            {filterContacts.map(element => (
+              <li key={element.id}>
+                <DeleteContact
+                  contactName={element.name}
+                  deleteContacts={deleteContacts}
+                />
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
     );
   }
 }

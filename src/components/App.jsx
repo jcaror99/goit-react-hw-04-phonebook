@@ -1,7 +1,8 @@
 import { Component } from 'react';
+import './App.module.css';
 import ContactForm from './ContactForm/ContactForm.jsx';
-import ContactList from './ContactList/ContactList.jsx';
 import FilterContact from './FilterContact/FilterContact.jsx';
+import ContactList from './ContactList/ContactList.jsx';
 
 class App extends Component {
   state = {
@@ -34,18 +35,17 @@ class App extends Component {
     this.setState({ filter: e.target.value });
   };
 
+  deleteContacts = contactName => {
+    this.setState({
+      contacts: this.state.contacts.filter(
+        element => element.name.toLowerCase() !== contactName.toLowerCase()
+      ),
+    });
+  };
+
   render() {
     return (
-      <div
-        style={{
-          height: '100vh',
-          display: 'flex',
-          flexDirection: 'column',
-          fontSize: 40,
-          color: '#010101',
-          marginLeft: 15,
-        }}
-      >
+      <div>
         <h1>Phonebook</h1>
         <ContactForm addContacts={this.addContacts} />
         <h2>Contacts</h2>
@@ -53,6 +53,7 @@ class App extends Component {
         <ContactList
           contacts={this.state.contacts}
           filter={this.state.filter}
+          deleteContacts={this.deleteContacts}
         />
       </div>
     );

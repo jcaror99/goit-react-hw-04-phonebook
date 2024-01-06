@@ -7,17 +7,21 @@ class ContactForm extends Component {
     e.preventDefault();
     const inputName = document.querySelector('input[name="name"]');
     const inputTel = document.querySelector('input[name="number"]');
+    const addContactForm = document.querySelector(
+      'form[name="addContactForm"]'
+    );
     this.props.addContacts({
       name: inputName.value,
       id: nanoid(),
       number: inputTel.value,
     });
+    addContactForm.reset();
   };
 
   render() {
     return (
       <div>
-        <form action="">
+        <form name="addContactForm" action="">
           <label htmlFor={nanoid()}>
             Name
             <input
@@ -39,7 +43,11 @@ class ContactForm extends Component {
               required
             />
           </label>
-          <button type="submit" onClick={this.handleClick}>
+          <button
+            className={css.addButton}
+            type="submit"
+            onClick={this.handleClick}
+          >
             Add contact
           </button>
         </form>

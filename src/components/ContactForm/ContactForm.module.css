@@ -11,7 +11,7 @@ label {
   flex-direction: column;
 }
 
-button {
+.addButton {
   margin-top: 20px;
 }
 
