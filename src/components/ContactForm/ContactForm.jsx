@@ -17,7 +17,6 @@ class ContactForm extends Component {
   render() {
     return (
       <div>
-        <h2>Phonebook</h2>
         <form action="">
           <label htmlFor={nanoid()}>
             Name

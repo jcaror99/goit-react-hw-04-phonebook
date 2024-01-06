@@ -1,5 +1,4 @@
 import { Component } from 'react';
-import FilterContact from '../FilterContact/FilterContact.jsx';
 
 class ContactList extends Component {
   render() {
@@ -10,8 +9,6 @@ class ContactList extends Component {
 
     return (
       <div>
-        <h2>Contacts</h2>
-        <FilterContact filterChange={this.props.filterChange} />
         <ul>
           {filterContacts.map(element => (
             <li key={element.id}>
