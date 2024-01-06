@@ -6,7 +6,11 @@ class FilterContact extends Component {
     return (
       <div className={css.filterContact}>
         <span>Find contacts by name</span>
-        <input type="text" className={css.filterInput} />
+        <input
+          type="text"
+          className={css.filterInput}
+          onChange={this.props.filterChange}
+        />
       </div>
     );
   }

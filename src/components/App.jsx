@@ -23,6 +23,10 @@ class App extends Component {
     }
   };
 
+  filterChange = e => {
+    this.setState({ filter: e.target.value });
+  };
+
   render() {
     return (
       <div
@@ -39,6 +43,7 @@ class App extends Component {
         <ContactList
           contacts={this.state.contacts}
           filter={this.state.filter}
+          filterChange={this.filterChange}
         />
       </div>
     );

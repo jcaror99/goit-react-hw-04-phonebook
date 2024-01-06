@@ -11,7 +11,7 @@ class ContactList extends Component {
     return (
       <div>
         <h2>Contacts</h2>
-        <FilterContact />
+        <FilterContact filterChange={this.props.filterChange} />
         <ul>
           {filterContacts.map(element => (
             <li key={element.id}>
