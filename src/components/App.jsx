@@ -6,27 +6,33 @@ import ContactList from './ContactList/ContactList.jsx';
 
 class App extends Component {
   state = {
-    contacts: [
-      { id: 'id-1', name: 'Rosie Simpson', number: '459-12-56' },
-      { id: 'id-2', name: 'Hermione Kline', number: '443-89-12' },
-      { id: 'id-3', name: 'Eden Clements', number: '645-17-79' },
-      { id: 'id-4', name: 'Annie Copeland', number: '227-91-26' },
-    ],
+    contacts: [],
     filter: '',
   };
 
   addContacts = contact => {
     if (contact.name.trim()) {
+      const storedContacts = localStorage.getItem('contactList');
+      let contactsArray = [];
+
+      if (storedContacts) {
+        contactsArray = JSON.parse(storedContacts).contacts;
+      }
+
       if (
-        this.state.contacts.some(
+        contactsArray.some(
           element => element.name.toLowerCase() === contact.name.toLowerCase()
         )
       ) {
         return alert(`${contact.name} is already in contacts`);
       } else {
-        this.setState(prevState => ({
-          contacts: [...prevState.contacts, contact],
-        }));
+        const updatedContacts = [...contactsArray, contact];
+        localStorage.setItem(
+          'contactList',
+          JSON.stringify({ contacts: updatedContacts })
+        );
+        console.log(2, 'adicion a localstorage');
+        this.setState({ contacts: updatedContacts });
       }
     }
   };
@@ -36,12 +42,36 @@ class App extends Component {
   };
 
   deleteContacts = contactName => {
-    this.setState({
-      contacts: this.state.contacts.filter(
-        element => element.name.toLowerCase() !== contactName.toLowerCase()
-      ),
-    });
+    const storedContacts = localStorage.getItem('contactList');
+    let contactsArray = [];
+
+    if (storedContacts) {
+      contactsArray = JSON.parse(storedContacts).contacts;
+    }
+
+    let deleteContactsArray = contactsArray.filter(
+      element => element.name.toLowerCase() !== contactName.toLowerCase()
+    );
+
+    localStorage.setItem(
+      'contactList',
+      JSON.stringify({ contacts: deleteContactsArray })
+    );
+    console.log(3, 'eliminacion de localstorage');
+
+    this.setState({ contacts: deleteContactsArray });
   };
+
+  handleLocalStorage() {
+    const storedContacts = localStorage.getItem('contactList');
+    if (storedContacts) {
+      console.log(1, 'montaje del Dom obtenido de localstorage');
+      return JSON.parse(storedContacts).contacts;
+    }
+
+    console.log(0, 'montaje del Dom obtenido de estado original');
+    return this.state.contacts;
+  }
 
   render() {
     return (
@@ -51,7 +81,7 @@ class App extends Component {
         <h2>Contacts</h2>
         <FilterContact filterChange={this.filterChange} />
         <ContactList
-          contacts={this.state.contacts}
+          contacts={this.handleLocalStorage()}
           filter={this.state.filter}
           deleteContacts={this.deleteContacts}
         />
