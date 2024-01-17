@@ -65,11 +65,11 @@ class App extends Component {
   handleLocalStorage() {
     const storedContacts = localStorage.getItem('contactList');
     if (storedContacts) {
-      console.log(1, 'montaje del Dom obtenido de localstorage');
+      console.log(1, 'montaje del DOM obtenido de localstorage');
       return JSON.parse(storedContacts).contacts;
     }
 
-    console.log(0, 'montaje del Dom obtenido de estado original');
+    console.log(0, 'montaje del DOM obtenido de estado original');
     return this.state.contacts;
   }
 
