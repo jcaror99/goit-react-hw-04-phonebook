@@ -1,16 +1,14 @@
-import { Component } from 'react';
 import './App.module.css';
 import ContactForm from './ContactForm/ContactForm.jsx';
 import FilterContact from './FilterContact/FilterContact.jsx';
 import ContactList from './ContactList/ContactList.jsx';
+import { useState } from 'react';
 
-class App extends Component {
-  state = {
-    contacts: [],
-    filter: '',
-  };
+const App = () => {
+  const [contacts, setContacts] = useState([]);
+  const [filter, setFilter] = useState('');
 
-  addContacts = contact => {
+  const addContacts = contact => {
     if (contact.name.trim()) {
       const storedContacts = localStorage.getItem('contactList');
       let contactsArray = [];
@@ -32,16 +30,16 @@ class App extends Component {
           JSON.stringify({ contacts: updatedContacts })
         );
         console.log(2, 'adicion a localstorage');
-        this.setState({ contacts: updatedContacts });
+        setContacts({ contacts: updatedContacts });
       }
     }
   };
 
-  filterChange = e => {
-    this.setState({ filter: e.target.value });
+  const filterChange = e => {
+    setFilter(e.target.value);
   };
 
-  deleteContacts = contactName => {
+  const deleteContacts = contactName => {
     const storedContacts = localStorage.getItem('contactList');
     let contactsArray = [];
 
@@ -59,10 +57,10 @@ class App extends Component {
     );
     console.log(3, 'eliminacion de localstorage');
 
-    this.setState({ contacts: deleteContactsArray });
+    setContacts({ contacts: deleteContactsArray });
   };
 
-  handleLocalStorage() {
+  const handleLocalStorage = () => {
     const storedContacts = localStorage.getItem('contactList');
     if (storedContacts) {
       console.log(1, 'montaje del DOM obtenido de localstorage');
@@ -70,24 +68,22 @@ class App extends Component {
     }
 
     console.log(0, 'montaje del DOM obtenido de estado original');
-    return this.state.contacts;
-  }
+    return contacts;
+  };
 
-  render() {
-    return (
-      <div>
-        <h1>Phonebook</h1>
-        <ContactForm addContacts={this.addContacts} />
-        <h2>Contacts</h2>
-        <FilterContact filterChange={this.filterChange} />
-        <ContactList
-          contacts={this.handleLocalStorage()}
-          filter={this.state.filter}
-          deleteContacts={this.deleteContacts}
-        />
-      </div>
-    );
-  }
-}
+  return (
+    <div>
+      <h1>Phonebook</h1>
+      <ContactForm addContacts={addContacts} />
+      <h2>Contacts</h2>
+      <FilterContact filterChange={filterChange} />
+      <ContactList
+        contacts={handleLocalStorage()}
+        filter={filter}
+        deleteContacts={deleteContacts}
+      />
+    </div>
+  );
+};
 
 export { App };
